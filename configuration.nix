@@ -37,16 +37,8 @@
     git
     wget
     curl
+    home-manager
   ];
-
-  # git configurations
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "EyalLitvin";
-      user.email = "eyalitvin@gmail.com";
-    };
-  };
 
   # Enable SSH so we can log in from the host later
   services.openssh.enable = true;
