@@ -38,6 +38,7 @@
     git
     wget
     curl
+    tree
     home-manager
   ];
 

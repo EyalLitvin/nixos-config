@@ -13,12 +13,12 @@
     nixosConfigurations.nixos-vm = 
     nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
+      modules = [ ./nixos/configuration.nix ];
     };
     
     homeConfigurations.eyal = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      modules = [ ./home.nix ];
+      modules = [ ./home/home.nix ];
     };
   };
 }
