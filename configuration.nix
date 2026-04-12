@@ -29,6 +29,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     initialPassword = "changeme";
+    shell = pkgs.zsh;
   };
 
   # Basic system packages
@@ -52,6 +53,9 @@
       };
     };
   };
+
+  # Zsh setup
+  programs.zsh.enable = true;
 
   # Enable SSH so we can log in from the host later
   services.openssh.enable = true;
