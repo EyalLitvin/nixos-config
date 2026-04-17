@@ -5,6 +5,8 @@
     ./shell.nix
     ./terminal.nix
     ./hyprland.nix
+    ./git.nix
+    ./shell-tools.nix
   ];
 
   programs.home-manager.enable = true;
