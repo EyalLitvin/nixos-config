@@ -21,6 +21,8 @@
       la = "eza -la --icons --git";
       cat = "bat";
       cs = "z";
+      vim = "nvim";
+      vi = "nvim";
     };
   };
 

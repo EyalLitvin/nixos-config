@@ -8,6 +8,7 @@
     ./git.nix
     ./shell-tools.nix
     ./fonts.nix
+    ./nvim.nix
   ];
 
   programs.home-manager.enable = true;
