@@ -14,6 +14,14 @@
       ignoreDups = true;
       share = true;
     };
+
+    shellAliases = {
+      ls = "eza --icons";
+      ll = "eza -l --icons --git";
+      la = "eza -la --icons --git";
+      cat = "bat";
+      cs = "z";
+    };
   };
 
   # Starship setup
