@@ -7,6 +7,7 @@
     ./hyprland.nix
     ./git.nix
     ./shell-tools.nix
+    ./fonts.nix
   ];
 
   programs.home-manager.enable = true;
