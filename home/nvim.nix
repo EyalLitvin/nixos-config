@@ -1,26 +1,42 @@
 { pkgs, ... }:
 
   {
-    programs.neovim = {
+    programs.nixvim = {
       enable = true;
       defaultEditor = true;
 
-      initLua = ''
-        -- Basic options
-        vim.opt.number = true
-        vim.opt.relativenumber = true
-        vim.opt.tabstop = 2
-        vim.opt.shiftwidth = 2
-        vim.opt.expandtab = true
-        vim.opt.smartindent = true
-        vim.opt.wrap = false
-        vim.opt.scrolloff = 8
-        vim.opt.signcolumn = "yes"
-        vim.opt.updatetime = 50
+      opts = {
+        number = true;
+        relativenumber = true;
+        tabstop = 2;
+        shiftwidth = 2;
+        expandtab = true;
+        smartindent = true;
+        wrap = true;
+        scrolloff = 8;
+        signcolumn = "yes";
+        updatetime = 50;
+      };
 
-        -- Leader key
-        vim.g.mapleader = " "
-        vim.g.maplocalleader = " "
-      '';
+      globals = {
+        mapleader = " ";
+        maplocalleader = " ";
+      };
+
+      keymaps = [
+        {
+          mode = "n";
+          key = "<leader>w";
+          action = "<cmd>w<cr>";
+          options.desc = "Save file";
+        }
+      ];
+
+      colorschemes.tokyonight.enable = true;
+
+      plugins.which-key = {
+        enable = true;
+        settings.preset = "modern";
+      };
     };
   }
