@@ -20,6 +20,7 @@
       ll = "eza -l --icons --git";
       la = "eza -la --icons --git";
       cat = "bat";
+      oil = "nvim .";
       cs = "z";
       vim = "nvim";
       vi = "nvim";

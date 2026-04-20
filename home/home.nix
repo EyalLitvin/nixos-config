@@ -9,6 +9,7 @@
     ./shell-tools.nix
     ./fonts.nix
     ./nvim.nix
+    ./languages.nix
   ];
 
   programs.home-manager.enable = true;
