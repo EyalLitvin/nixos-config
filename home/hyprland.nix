@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       "$terminal" = "kitty";
-      "$browser" = "firefox";
+      "$browser" = "qutebrowser";
       "$explorer" = "oil";
       "$mod" = "SUPER";
 

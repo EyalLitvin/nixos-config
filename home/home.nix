@@ -11,6 +11,7 @@
     ./fonts.nix
     ./nvim.nix
     ./languages.nix
+    ./qutebrowser.nix
   ];
 
   programs.home-manager.enable = true;
