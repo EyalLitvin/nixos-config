@@ -12,6 +12,7 @@
     ./nvim.nix
     ./languages.nix
     ./qutebrowser.nix
+    ./yazi.nix
   ];
 
   programs.home-manager.enable = true;
