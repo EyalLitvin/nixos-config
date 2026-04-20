@@ -11,8 +11,8 @@
 - [x] Deep dive: editor → neovim (via nixvim)
 
 ## In Progress
-- [ ] nixvim setup (wiring flake input, rewriting neovim.nix)
-- [ ] Hyprland keybindings polish
+- [x] nixvim setup (wiring flake input, rewriting neovim.nix)
+- [x] Hyprland keybindings polish
 - [ ] DemiBold font fix
 
 ## Todo

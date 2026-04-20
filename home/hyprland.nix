@@ -1,16 +1,55 @@
 { config, pkgs, ... }:
 
 {
-  # Hyprland setup
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
       "$terminal" = "kitty";
+      "$browser" = "firefox";
+      "$explorer" = "oil";
       "$mod" = "SUPER";
+
       bind = [
+        # Apps
         "$mod, Return, exec, $terminal"
+        "$mod, B, exec, $browser"
+        "$mod, E, exec, $terminal -e $explorer"
+
+        # Window management
         "$mod, Q, killactive"
+        "$mod, F, fullscreen"
+        "$mod, Space, togglefloating"
         "$mod, M, exit"
+
+        # Focus movement (vim-style)
+        "$mod, H, movefocus, l"
+        "$mod, L, movefocus, r"
+        "$mod, K, movefocus, u"
+        "$mod, J, movefocus, d"
+
+        # Move windows
+        "$mod SHIFT, H, movewindow, l"
+        "$mod SHIFT, L, movewindow, r"
+        "$mod SHIFT, K, movewindow, u"
+        "$mod SHIFT, J, movewindow, d"
+
+        # Workspace cycling
+        "$mod, Tab, workspace, e+1"
+        "$mod SHIFT, Tab, workspace, e-1"
+
+        # Move window to workspace
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
+        "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+      ];
+
+      binde = [
+        "$mod ALT, H, resizeactive, -20 0"
+        "$mod ALT, L, resizeactive, 20 0"
+        "$mod ALT, K, resizeactive, 0 -20"
+        "$mod ALT, J, resizeactive, 0 20"
       ];
     };
   };

@@ -4,6 +4,7 @@
   imports = [
     ./shell.nix
     ./terminal.nix
+    ./apps.nix
     ./hyprland.nix
     ./git.nix
     ./shell-tools.nix
