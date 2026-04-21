@@ -16,7 +16,7 @@
 - [ ] DemiBold font fix
 
 ## Todo
-- [ ] Stage 5 — General apps (browser deep dive, file manager, screenshots, notifications)
+- [x] Stage 5 — General apps (browser deep dive, file manager, screenshots, notifications)
 - [ ] Stage 6 — Theming (stylix, waybar/eww, Hyprland visuals)
 - [ ] Stage 7 — Nix shells + direnv
 - [ ] Stage 8 — LibrePhoenix config review + refactor
