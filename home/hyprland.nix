@@ -9,17 +9,24 @@
       "$explorer" = "oil";
       "$mod" = "SUPER";
 
+      exec-once = [
+        "wl-paste --watch cliphist store"
+      ];
+
       bind = [
         # Apps
         "$mod, Return, exec, $terminal"
         "$mod, B, exec, $browser"
         "$mod, E, exec, $terminal -e $explorer"
+        "$mod, D, exec, fuzzel"
+        "$mod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
 
         # Window management
         "$mod, Q, killactive"
         "$mod, F, fullscreen"
         "$mod, Space, togglefloating"
         "$mod, M, exit"
+
 
         # Focus movement (vim-style)
         "$mod, H, movefocus, l"

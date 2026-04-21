@@ -13,6 +13,9 @@
     ./languages.nix
     ./qutebrowser.nix
     ./yazi.nix
+    ./clipboard.nix
+    ./screenshot.nix
+    ./notifications.nix
   ];
 
   programs.home-manager.enable = true;

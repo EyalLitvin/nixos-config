@@ -16,6 +16,7 @@
         scrolloff = 8;
         signcolumn = "yes";
         updatetime = 50;
+        clipboard = "unnamedplus";
       };
 
       globals = {
