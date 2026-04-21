@@ -20,6 +20,8 @@
 
   programs.home-manager.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
+
   home.username = "eyal";
   home.homeDirectory = "/home/eyal";
 
