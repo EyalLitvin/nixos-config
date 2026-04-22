@@ -17,8 +17,13 @@
 
 ## Todo
 - [x] Stage 5 — General apps (browser deep dive, file manager, screenshots, notifications)
-- [ ] Stage 6 — Theming (stylix, waybar/eww, Hyprland visuals)
-- [ ] Stage 7 — Nix shells + direnv
+- [x] Stage 6 — Theming (stylix, waybar, Hyprland visuals)
+- [~] Stage 7 — Dev environment
+  - [ ] SSH configured declaratively (key path, ~/.ssh/config, git uses SSH)
+  - [ ] Repo cloning — static list in home-manager, cloned once to ~/dev/
+  - [ ] direnv configured globally
+  - [ ] Project templates in ~/.dotfiles/templates/ (base, rust, flutter)
+  - [ ] eyal-proj CLI script installed via home-manager
 - [ ] Stage 8 — LibrePhoenix config review + refactor
 - [ ] Switch git remote auth from HTTPS/PAT to SSH
 - [ ] Fix initialPassword → proper hashed password
