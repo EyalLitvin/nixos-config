@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, stylixShared, ... }:
 
 {
   imports = [
@@ -60,6 +60,12 @@
 
   # Enable SSH so we can log in from the host later
   services.openssh.enable = true;
+
+  # Stylix — system-level theming (greeter, fonts, cursor)
+  stylix = {
+    enable = true;
+    inherit (stylixShared) base16Scheme image;
+  };
 
   # This value determines the NixOS compatibility version.
   # Never change this after the initial install.

@@ -9,8 +9,8 @@
       statusbar.show = "in-mode";
       scrolling.smooth = true;
       content.blocking.enabled = true;
-      fonts.default_family = "FiraCode Nerd Font";
-      fonts.default_size = "11pt";
+      # fonts.default_family = "FiraCode Nerd Font";
+      # fonts.default_size = "11pt";
     };
 
     searchEngines = {

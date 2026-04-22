@@ -8,7 +8,6 @@
     ./hyprland.nix
     ./git.nix
     ./shell-tools.nix
-    ./fonts.nix
     ./nvim.nix
     ./languages.nix
     ./qutebrowser.nix
@@ -16,6 +15,8 @@
     ./clipboard.nix
     ./screenshot.nix
     ./notifications.nix
+    ./stylix.nix
+    ./waybar.nix
   ];
 
   programs.home-manager.enable = true;

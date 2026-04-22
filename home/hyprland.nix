@@ -58,6 +58,36 @@
         "$mod ALT, K, resizeactive, 0 -20"
         "$mod ALT, J, resizeactive, 0 20"
       ];
+
+      general = {
+        gaps_in = 4;
+        gaps_out = 8;
+        border_size = 2;
+      };
+
+      decoration = {
+        rounding = 8;
+        blur = {
+          enabled = true;
+          size = 4;
+          passes = 2;
+        };
+        shadow = {
+          enabled = true;
+          range = 8;
+          render_power = 2;
+        };
+      };
+
+      animations = {
+        enabled = true;
+        bezier = "ease, 0.25, 0.1, 0.25, 1.0";
+        animation = [
+          "windows, 1, 3, ease, popin 85%"
+          "fade, 1, 4, ease"
+          "workspaces, 1, 4, ease, slide"
+        ];
+      };
     };
   };
 }
