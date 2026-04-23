@@ -29,5 +29,7 @@
 
   # This is the home-manager equivalent of system.stateVersion.
   # Same rule: set it once, never change it.
+  gtk.gtk4.theme = null;
+
   home.stateVersion = "24.11";
 }

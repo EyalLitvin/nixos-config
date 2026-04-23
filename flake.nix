@@ -44,7 +44,7 @@
       extraSpecialArgs = { inherit stylixShared; };
       modules = [
         nixvim.homeModules.nixvim
-        stylix.homeManagerModules.stylix
+        stylix.homeModules.stylix
         sops-nix.homeManagerModules.sops
         ./home/home.nix
       ];
