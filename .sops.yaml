@@ -1,0 +1,8 @@
+keys:
+  - &personal age1un2sf6t7fymluh6y9k65sk3685x6rapc0cyfv3fcw6f2dg9n932smfyym9
+
+creation_rules:
+  - path_regex: secrets/.*
+    key_groups:
+      - age:
+          - *personal

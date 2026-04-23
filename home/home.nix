@@ -7,6 +7,7 @@
     ./apps.nix
     ./hyprland.nix
     ./git.nix
+    ./secrets.nix
     ./shell-tools.nix
     ./nvim.nix
     ./languages.nix

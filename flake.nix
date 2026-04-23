@@ -15,9 +15,13 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, stylix }:
+  outputs = { self, nixpkgs, home-manager, nixvim, stylix, sops-nix }:
   let
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     stylixShared = {
@@ -41,6 +45,7 @@
       modules = [
         nixvim.homeModules.nixvim
         stylix.homeManagerModules.stylix
+        sops-nix.homeManagerModules.sops
         ./home/home.nix
       ];
     };
