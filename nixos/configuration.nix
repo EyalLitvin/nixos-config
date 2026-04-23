@@ -20,8 +20,14 @@
       "nix-command"
       "flakes"
     ] ;
-    substituters = [ "https://nix-community.cachix.org" ];
-    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCUSeBs=" ];
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCUSeBs="
+    ];
   };
 
   # Timezone and locale
@@ -64,6 +70,12 @@
 
   # Enable SSH so we can log in from the host later
   services.openssh.enable = true;
+
+  # GitHub host key — prevents the "unknown host" prompt
+  programs.ssh.knownHosts."github.com" = {
+    hostNames = [ "github.com" ];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+  };
 
   # Stylix — system-level theming (greeter, fonts, cursor)
   stylix = {
