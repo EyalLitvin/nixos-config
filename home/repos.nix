@@ -5,6 +5,7 @@ let
     "EyalLitvin/game_logic"
     "EyalLitvin/Thesis"
     "EyalLitvin/personal-site"
+    "EyalLitvin/opti-do"
   ];
 in
 {
