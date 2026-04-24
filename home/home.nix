@@ -18,6 +18,7 @@
     ./notifications.nix
     ./stylix.nix
     ./waybar.nix
+    ./repos.nix
   ];
 
   programs.home-manager.enable = true;
