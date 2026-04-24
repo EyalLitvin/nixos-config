@@ -32,4 +32,11 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  # direnv — auto-activate dev shells when entering a directory
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 }
