@@ -1,5 +1,5 @@
 keys:
-  - &personal age1un2sf6t7fymluh6y9k65sk3685x6rapc0cyfv3fcw6f2dg9n932smfyym9
+  - &personal age1tx9vd7k9f72uwp2cqm6v4mq6c66kmtd7gzy8c44w8438uyl4jy9s8azull
 
 creation_rules:
   - path_regex: secrets/.*

@@ -30,7 +30,7 @@
     };
   in
   {
-    nixosConfigurations.nixos-vm = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.onyx = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit stylixShared; };
       modules = [

@@ -10,7 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Hostname
-  networking.hostName = "nixos-vm";
+  networking.hostName = "onyx";
 
   # Networking - NetworkManager handles wifi/ethernet
   networking.networkmanager.enable = true;
@@ -83,7 +83,24 @@
     inherit (stylixShared) base16Scheme image;
   };
 
+  # WiFi — RTL88x2bu USB adapter (USB ID 0bda:b812, e.g. AC1200 Techkey)
+  boot.extraModulePackages = with config.boot.kernelPackages; [ rtl88x2bu ];
+
+  # nvidia
+
+  nixpkgs.config.allowUnfree = true;
+  services.xserver.videoDrivers = [ "nvidia" ] ;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+
   # This value determines the NixOS compatibility version.
   # Never change this after the initial install.
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
+
 }
