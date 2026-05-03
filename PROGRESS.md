@@ -16,9 +16,9 @@
 - [x] Realtek RTL88x2bu WiFi driver (boot.extraModulePackages)
 
 ## Immediate (blocking)
-- [ ] Fix Realtek WiFi chip — driver not loading on real hardware
-- [ ] Redo sops-nix setup — private key was accidentally deleted; need to regenerate and re-encrypt secrets
-- [ ] Switch git remote auth from HTTPS/PAT to SSH (was partially done via sops-nix, needs redo after key regeneration)
+- [x] Fix Realtek WiFi chip — driver not loading on real hardware
+- [x] Redo sops-nix setup — regenerated age key, re-encrypted SSH key, updated .sops.yaml
+- [x] Switch git remote to SSH (git remote set-url)
 
 ## Soon
 - [ ] Write new-machine bootstrap README — full bring-up sequence, noting that the sops private key must be placed before running home-manager switch

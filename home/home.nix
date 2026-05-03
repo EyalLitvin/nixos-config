@@ -19,6 +19,7 @@
     ./stylix.nix
     ./waybar.nix
     ./repos.nix
+    ./imv.nix
   ];
 
   programs.home-manager.enable = true;

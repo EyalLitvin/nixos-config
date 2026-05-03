@@ -117,5 +117,9 @@
           view_options.show_hidden = true;
         };
       };
+
+      plugins.render-markdown = {
+        enable = true;
+      };
     };
   }

@@ -59,6 +59,11 @@
         "$mod ALT, J, resizeactive, 0 20"
       ];
 
+      input = {
+        kb_layout = "us,il";
+        kb_options = "grp:alt_shift_toggle";
+      };
+
       general = {
         gaps_in = 4;
         gaps_out = 8;

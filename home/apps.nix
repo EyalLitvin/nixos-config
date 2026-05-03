@@ -5,5 +5,6 @@
     firefox
     claude-code
     qutebrowser
+    zapzap
   ];
 }

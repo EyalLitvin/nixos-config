@@ -7,6 +7,12 @@
     shellWrapperName = "y";
     settings = {
       mgr.show_hidden = true;
+      opener.image = [
+        { run = ''imv "$@"''; desc = "imv"; block = false; }
+      ];
+      open.rules = [
+        { mime = "image/*"; use = "image"; }
+      ];
     };
     keymap = {
       mgr.prepend_keymap = [
