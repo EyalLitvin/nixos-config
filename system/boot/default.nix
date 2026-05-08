@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  imports = [
+    ./bootloader
+    ./kernel
+    ./initrd
+  ];
+}

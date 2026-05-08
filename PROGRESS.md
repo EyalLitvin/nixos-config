@@ -14,6 +14,7 @@
 - [x] direnv configured globally (with nix-direnv)
 - [x] First boot on real hardware
 - [x] Realtek RTL88x2bu WiFi driver (boot.extraModulePackages)
+- [x] Repo restructure — flake-parts, hosts/, system/, home/ with category/tool/default.nix layout, mkOption pattern introduced
 
 ## Immediate (blocking)
 - [x] Fix Realtek WiFi chip — driver not loading on real hardware
@@ -21,7 +22,7 @@
 - [x] Switch git remote to SSH (git remote set-url)
 
 ## Soon
-- [ ] Write new-machine bootstrap README — full bring-up sequence, noting that the sops private key must be placed before running home-manager switch
+- [x] Write new-machine bootstrap README — full bring-up sequence, noting that the sops private key must be placed before running home-manager switch
 - [ ] Fix initialPassword → proper hashed password
 
 ## Stage 7 — Dev environment
@@ -35,4 +36,3 @@
 - [ ] DemiBold font fix
 - [ ] Fix uwsm/hyprland-start warning
 - [ ] Stage 8 — LibrePhoenix config review + refactor
-- [ ] Add folder categories to dotfiles once enough modules exist

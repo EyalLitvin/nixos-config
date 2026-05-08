@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  imports = [
+    ./nvidia
+    ./audio
+    ./wifi
+  ];
+}

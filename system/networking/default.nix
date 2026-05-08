@@ -1,0 +1,9 @@
+{ ... }:
+
+{
+  imports = [
+    ./networkmanager
+    ./firewall
+    ./ssh
+  ];
+}
