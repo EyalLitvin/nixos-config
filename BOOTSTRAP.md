@@ -152,7 +152,7 @@ The file should contain a single line: `AGE-SECRET-KEY-1...`
 reboot
 ```
 
-Remove the USB stick. Log in as `eyal` (password: `changeme`).
+Remove the USB stick. Log in as `eyal` using the password set in `system/security/users/default.nix`.
 
 Run home-manager to set up the full user environment:
 
@@ -173,7 +173,6 @@ git push
 
 ## Post-install checklist
 
-- [ ] Change password: `passwd`
 - [ ] Verify WiFi works (if applicable): `nmcli device wifi list`
 - [ ] Verify SSH key deployed: `ls -la ~/.ssh/id_ed25519`
 - [ ] Push the new host commit

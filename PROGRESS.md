@@ -23,7 +23,7 @@
 
 ## Soon
 - [x] Write new-machine bootstrap README — full bring-up sequence, noting that the sops private key must be placed before running home-manager switch
-- [ ] Fix initialPassword → proper hashed password
+- [x] Fix initialPassword → proper hashed password
 
 ## Stage 7 — Dev environment
 - [ ] SSH configured declaratively (key path, ~/.ssh/config)
@@ -34,5 +34,6 @@
 - [ ] Better WiFi management UI (nmcli works but something like nmtui or a waybar widget would be nicer)
 - [ ] Persistent Hyprland workspaces — always 5, never disappear, easy movement between them
 - [ ] DemiBold font fix
-- [ ] Fix uwsm/hyprland-start warning
+- [x] Fix xdg-desktop-portal-hyprland startup timing (dbus-update-activation-environment)
+- [x] Fix uwsm/hyprland-start warning
 - [ ] Stage 8 — LibrePhoenix config review + refactor
