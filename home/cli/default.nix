@@ -8,5 +8,6 @@
     ./eza
     ./ripgrep
     ./yazi
+    ./jq
   ];
 }

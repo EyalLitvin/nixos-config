@@ -12,7 +12,7 @@
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "awww-daemon"
-        "sh -c 'while true; do awww img $(find ~/.dotfiles/assets/wallpapers -type f | shuf -n1) --transition-type grow --transition-pos center --transition-duration 2; sleep 1200; done'"
+        "sh -c 'while true; do for output in $(hyprctl monitors -j | jq -r \".[].name\"); do awww img $(find ~/.dotfiles/assets/wallpapers -type f | shuf -n1) --output $output --transition-type grow --transition-pos center --transition-duration 2; done; sleep 1200; done'"
         "wl-paste --watch cliphist store"
       ];
 

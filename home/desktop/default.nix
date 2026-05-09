@@ -8,5 +8,6 @@
     ./clipboard
     ./screenshot
     ./fuzzel
+    ./kanshi
   ];
 }
