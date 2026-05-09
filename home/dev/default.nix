@@ -6,5 +6,6 @@
     ./direnv
     ./languages
     ./repos
+    ./ssh
   ];
 }

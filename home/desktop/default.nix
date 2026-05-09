@@ -7,5 +7,6 @@
     ./notifications
     ./clipboard
     ./screenshot
+    ./fuzzel
   ];
 }

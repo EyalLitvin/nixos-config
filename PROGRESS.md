@@ -26,7 +26,7 @@
 - [x] Fix initialPassword → proper hashed password
 
 ## Stage 7 — Dev environment
-- [ ] SSH configured declaratively (key path, ~/.ssh/config)
+- [x] SSH configured declaratively (key path, ~/.ssh/config)
 - [ ] Repo cloning — declared list in home-manager, cloned once to ~/dev/, graceful per-repo failure
 - [ ] Project templates in ~/.dotfiles/templates/ (base, rust, flutter)
 
