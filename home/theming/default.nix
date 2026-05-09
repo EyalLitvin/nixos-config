@@ -22,7 +22,6 @@
         name = "Noto Color Emoji";
       };
       sizes.terminal = 13;
-      sizes.applications = 18;
     };
     opacity.terminal = 0.75;
     targets.hyprpaper.enable = lib.mkForce false;
