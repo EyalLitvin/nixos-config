@@ -9,5 +9,6 @@
     ./ripgrep
     ./yazi
     ./jq
+    ./uutils
   ];
 }

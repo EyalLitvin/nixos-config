@@ -1,0 +1,5 @@
+{ pkgs, ... }:
+
+{
+  home.packages = [ pkgs.uutils-coreutils-noprefix ];
+}

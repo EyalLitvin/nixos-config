@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.nixvim = {
@@ -83,5 +83,10 @@
     };
 
     plugins.render-markdown.enable = true;
+
+    extraPlugins = [ pkgs.vimPlugins.kitty-scrollback-nvim ];
+    extraConfigLua = ''
+      require('kitty-scrollback').setup()
+    '';
   };
 }

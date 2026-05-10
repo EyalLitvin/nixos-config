@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.zsh = {
@@ -6,6 +6,24 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     historySubstringSearch.enable = true;
+
+    plugins = [
+      {
+        name = "zsh-vi-mode";
+        src = "${pkgs.zsh-vi-mode}/share/zsh-vi-mode";
+      }
+    ];
+
+    # zsh-vi-mode overrides all keybindings on init, so history-substring-search
+    # must be rebound inside its post-init hook to survive.
+    initContent = ''
+      zvm_after_init() {
+        bindkey '^[[A' history-substring-search-up
+        bindkey '^[[B' history-substring-search-down
+        bindkey -M vicmd 'k' history-substring-search-up
+        bindkey -M vicmd 'j' history-substring-search-down
+      }
+    '';
 
     history = {
       size = 10000;
@@ -15,9 +33,6 @@
     };
 
     shellAliases = {
-      ls  = "eza --icons";
-      ll  = "eza -l --icons --git";
-      la  = "eza -la --icons --git";
       cat = "bat";
       oil = "nvim .";
       cs  = "z";

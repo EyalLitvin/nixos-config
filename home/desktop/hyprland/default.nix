@@ -23,6 +23,7 @@
         "$mod, E, exec, $terminal -e $explorer"
         "$mod, D, exec, fuzzel"
         "$mod, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+        "$mod, N, exec, open-notification-history"
 
         # Window management
         "$mod, Q, killactive"

@@ -1,0 +1,9 @@
+#custom-sep {
+  color: @base03;
+  padding: 0 4px;
+}
+
+#custom-notification {
+  padding: 0 10px;
+  font-family: "FiraCode Nerd Font Mono", monospace;
+}

@@ -27,5 +27,5 @@
     targets.hyprpaper.enable = lib.mkForce false;
   };
 
-  home.packages = [ pkgs.awww ];
+  home.packages = [ pkgs.awww pkgs.nerd-fonts.symbols-only ];
 }
