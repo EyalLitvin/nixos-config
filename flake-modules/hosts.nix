@@ -40,6 +40,7 @@ in
         inputs.nixvim.homeModules.nixvim
         inputs.stylix.homeModules.stylix
         inputs.sops-nix.homeManagerModules.sops
+        inputs.prolix.homeManagerModules.default
       ];
     };
   }) hosts);

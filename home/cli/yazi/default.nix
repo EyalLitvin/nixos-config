@@ -10,8 +10,13 @@
       opener.image = [
         { run = ''imv "$@"''; desc = "imv"; block = false; }
       ];
+      opener.editor = [
+        { run = ''nvim "$@"''; desc = "nvim"; block = true; }
+      ];
       open.rules = [
         { mime = "image/*"; use = "image"; }
+        { mime = "text/*"; use = "editor"; }
+        { name = "*.nix"; use = "editor"; }
       ];
     };
     keymap = {

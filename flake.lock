@@ -274,12 +274,39 @@
         "type": "github"
       }
     },
+    "prolix": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778623663,
+        "narHash": "sha256-rx4T2wjAZ5Q3NnQmifX7wot1ebBngeYicOzMa/Jpp5Q=",
+        "owner": "EyalLitvin",
+        "repo": "prolix",
+        "rev": "cf101d8fdc9bdd0afda13bcdb18c6793de8b6f2a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EyalLitvin",
+        "repo": "prolix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "prolix": "prolix",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
       }

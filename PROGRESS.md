@@ -28,12 +28,15 @@
 ## Stage 7 — Dev environment
 - [x] SSH configured declaratively (key path, ~/.ssh/config)
 - [ ] Repo cloning — declared list in home-manager, cloned once to ~/dev/, graceful per-repo failure
-- [ ] Project templates in ~/.dotfiles/templates/ (base, rust, flutter)
 
 ## Later
 - [ ] Better WiFi management UI (nmcli works but something like nmtui or a waybar widget would be nicer)
 - [ ] Persistent Hyprland workspaces — always 5, never disappear, easy movement between them
-- [ ] DemiBold font fix
 - [x] Fix xdg-desktop-portal-hyprland startup timing (dbus-update-activation-environment)
 - [x] Fix uwsm/hyprland-start warning
 - [ ] Stage 8 — LibrePhoenix config review + refactor
+- [ ] better status bar - wifi status, and other cool things? tbd
+- [ ] cronjob for garbage collection
+- [ ] impermanance
+- [ ] more cool nixvim plugins
+- [ ] more complete key bindings for window management and browsing and shell navigating. 
