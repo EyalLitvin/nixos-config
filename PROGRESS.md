@@ -15,28 +15,26 @@
 - [x] First boot on real hardware
 - [x] Realtek RTL88x2bu WiFi driver (boot.extraModulePackages)
 - [x] Repo restructure — flake-parts, hosts/, system/, home/ with category/tool/default.nix layout, mkOption pattern introduced
-
-## Immediate (blocking)
 - [x] Fix Realtek WiFi chip — driver not loading on real hardware
 - [x] Redo sops-nix setup — regenerated age key, re-encrypted SSH key, updated .sops.yaml
 - [x] Switch git remote to SSH (git remote set-url)
-
-## Soon
 - [x] Write new-machine bootstrap README — full bring-up sequence, noting that the sops private key must be placed before running home-manager switch
 - [x] Fix initialPassword → proper hashed password
+- [x] SSH configured declaratively (key path, ~/.ssh/config)
+- [x] Fix xdg-desktop-portal-hyprland startup timing (dbus-update-activation-environment)
+- [x] Fix uwsm/hyprland-start warning
+- [x] Persistent Hyprland workspaces — always 5, $mod+1-5 for direct jump
+- [x] Better status bar — WiFi SSID + volume level in waybar
+- [x] GC cronjob — weekly, delete generations older than 30 days
+- [x] More nixvim plugins — completions (cmp), gitsigns, comment.nvim, indent-blankline
+- [x] More complete keybindings — screenshot fix, volume media keys, workspace direct jump
+- [x] Ad-hoc notes workflow — INBOX.md for capturing system wishes between sessions
+- [x] Module split — editor/nixvim.nix, terminal/kitty.nix; monitor layout → hosts/onyx/monitors.nix
 
 ## Stage 7 — Dev environment
 - [x] SSH configured declaratively (key path, ~/.ssh/config)
 - [ ] Repo cloning — declared list in home-manager, cloned once to ~/dev/, graceful per-repo failure
 
 ## Later
-- [ ] Better WiFi management UI (nmcli works but something like nmtui or a waybar widget would be nicer)
-- [ ] Persistent Hyprland workspaces — always 5, never disappear, easy movement between them
-- [x] Fix xdg-desktop-portal-hyprland startup timing (dbus-update-activation-environment)
-- [x] Fix uwsm/hyprland-start warning
 - [ ] Stage 8 — LibrePhoenix config review + refactor
-- [ ] better status bar - wifi status, and other cool things? tbd
-- [ ] cronjob for garbage collection
-- [ ] impermanance
-- [ ] more cool nixvim plugins
-- [ ] more complete key bindings for window management and browsing and shell navigating. 
+- [ ] Impermanence — ephemeral root (tmpfs), /persist for kept state. Needs dedicated session + likely live USB to restructure btrfs layout

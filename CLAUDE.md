@@ -38,33 +38,40 @@ Eyal cares deeply about doing things **the Nix Way**:
 ```
 dotfiles/
 ├── flake.nix                  # minimal bootstrap — inputs + flake-parts
+├── INBOX.md                   # ad-hoc wish list — write things you want changed here,
+│                              #   then open a Claude session to implement them
 ├── flake-modules/
 │   └── hosts.nix              # auto-discovers hosts/, builds nixosConfigurations + homeConfigurations
 ├── hosts/
 │   └── <hostname>/
 │       ├── hardware-configuration.nix
 │       ├── configuration.nix  # sets systemSettings.* — the system control center for this machine
-│       └── home.nix           # sets userSettings.* — the home control center for this machine
+│       ├── home.nix           # sets userSettings.* — the home control center for this machine
+│       └── monitors.nix       # machine-specific kanshi monitor profiles (imported by home.nix)
 ├── system/                    # NixOS modules (run as root, affect /etc)
 │   ├── default.nix            # collector — imports all categories
-│   ├── boot/                  # bootloader, kernel modules, initrd
+│   ├── boot/                  # bootloader (systemd-boot), kernel modules (e.g. rtl88x2bu), initrd
 │   ├── hardware/              # GPU (nvidia), audio (pipewire), wifi drivers
 │   ├── networking/            # NetworkManager, firewall, sshd, known hosts
 │   ├── display/               # greeter (greetd/tuigreet), hyprland system-level enable
 │   ├── security/              # users, sudo, polkit
-│   ├── nix/                   # nix daemon settings, substituters, GC
+│   ├── nix/                   # nix daemon settings, substituters, GC (weekly, 30d retention)
 │   └── locale/                # timezone, i18n
 ├── home/                      # home-manager modules (user-level, affect ~/)
 │   ├── default.nix            # collector — imports all categories
 │   ├── shell/                 # zsh, starship
-│   ├── terminal/              # kitty
+│   ├── terminal/
+│   │   ├── default.nix        # collector: imports [ ./kitty.nix ]
+│   │   └── kitty.nix          # kitty config + kitty-scrollback-nvim keymaps
 │   ├── cli/                   # fzf, zoxide, bat, eza, ripgrep, yazi
-│   ├── editor/                # nvim via nixvim
+│   ├── editor/
+│   │   ├── default.nix        # collector: imports [ ./nixvim.nix ]
+│   │   └── nixvim.nix         # full nixvim config: LSP, cmp, telescope, oil, gitsigns, etc.
 │   ├── desktop/               # hyprland user config, waybar, notifications, clipboard, screenshot
 │   ├── browser/               # qutebrowser
 │   ├── media/                 # imv, future: mpv, audio players
 │   ├── dev/                   # git, direnv, languages, repo auto-clone
-│   ├── theming/               # stylix, wallpaper rotation
+│   ├── theming/               # stylix, wallpaper rotation (awww)
 │   ├── secrets/               # sops-nix home module
 │   └── apps/                  # misc GUI apps
 ├── assets/
@@ -73,7 +80,7 @@ dotfiles/
     └── ssh_key                # sops-encrypted secrets
 ```
 
-Each category folder contains single-responsibility leaf modules (`<tool>/default.nix`) and a `default.nix` collector that imports them all.
+Each category folder contains single-responsibility leaf modules and a `default.nix` collector that imports them all. Larger tools (editor, terminal) split their config into a dedicated `<tool>.nix` file imported by the collector.
 
 ---
 
@@ -97,7 +104,7 @@ Each category folder contains single-responsibility leaf modules (`<tool>/defaul
 1. `mkdir hosts/newmachine`
 2. Generate or copy `hardware-configuration.nix` for the new machine
 3. Create `hosts/newmachine/configuration.nix` — set only the `systemSettings.*` that differ from defaults
-4. Create `hosts/newmachine/home.nix` — set only the `userSettings.*` that differ from defaults
+4. Create `hosts/newmachine/home.nix` — set only the `userSettings.*` that differ from defaults; import `./monitors.nix` if the machine has non-trivial monitor setup
 5. The flake auto-discovers it — no edits to `flake.nix` needed
 6. Verify: `nixos-rebuild build --flake .#newmachine`
 
@@ -132,6 +139,45 @@ Modules declare options; host files set them. This is how machine-specific behav
 - System options: `options.systemSettings.<category>.<tool>.<option>`
 - Home options:   `options.userSettings.<category>.<tool>.<option>`
 - Always provide a `default` so hosts that don't mention an option get something sensible
+
+**When NOT to use mkOption:** Only expose a value as a `userSettings` option if a second machine would realistically set it differently. Personal taste (font size, colours, layout constants) should be hardcoded in the module — options add noise and imply variability that doesn't exist.
+
+---
+
+## Machine-specific config that isn't an option
+
+Some config is inherently machine-specific but doesn't warrant a `mkOption` (e.g. monitor layout — every machine will have different monitors, but there's no meaningful "default"). For this, create a sibling file in the host directory and import it:
+
+```
+hosts/onyx/
+├── home.nix         ← imports = [ ./monitors.nix ]; userSettings.desktop.kanshi.enable = true;
+└── monitors.nix     ← services.kanshi.settings = [ ... ];  (onyx's specific monitors)
+```
+
+This keeps `home.nix` slim while making it obvious the monitor config is machine-specific.
+
+---
+
+## Stylix notes
+
+`stylix.image` is **required** by the Stylix API even when you supply an explicit `base16Scheme`. The image is used for the wallpaper target, but since this config uses `awww` (swww) with a rotation script in Hyprland's `exec-once`, awww overrides any wallpaper Stylix might set. The `image` field is satisfied by pointing at any wallpaper in `assets/wallpapers/`.
+
+The `stylixShared` let-binding in `flake-modules/hosts.nix` passes the same scheme + image to both NixOS and home-manager configurations. This is the correct pattern — both layers need to agree on colours.
+
+---
+
+## Wayland / compositor layer notes
+
+In Wayland, the **compositor** (Hyprland) owns outputs. Services that need to talk to the compositor (kanshi, waybar) must run as user services *after* the Hyprland session starts, not as root services. That's why:
+
+- `kanshi` lives in `home/` (not `system/`) and uses `systemdTarget = "hyprland-session.target"`
+- `waybar` uses `programs.waybar.systemd.enable = true` (home-manager systemd unit)
+
+---
+
+## Ad-hoc notes workflow
+
+When something bothers you about the system mid-week, write it in `INBOX.md` at the repo root (one line per wish, plain English). Periodically open a Claude session and say: "implement INBOX.md items."
 
 ---
 

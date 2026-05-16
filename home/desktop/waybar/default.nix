@@ -12,6 +12,8 @@ let
       "$history_file" | ${pkgs.fuzzel}/bin/fuzzel --dmenu)
     [ -n "$selected" ] && printf '%s' "$selected" | ${pkgs.wl-clipboard}/bin/wl-copy
   '';
+
+  sep = { format = "||"; interval = "once"; tooltip = false; };
 in
 {
   home.packages = [ openHistory ];
@@ -26,7 +28,15 @@ in
         height = 36;
         modules-left   = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right  = [ "custom/sep" "custom/notification" "tray" ];
+        modules-right  = [
+          "wireplumber"
+          "custom/sep1"
+          "network"
+          "custom/sep2"
+          "custom/notification"
+          "custom/sep3"
+          "tray"
+        ];
 
         "hyprland/workspaces" = {
           format = "{id}";
@@ -41,15 +51,28 @@ in
 
         tray.spacing = 8;
 
-        "custom/sep" = {
-          format = "||";
-          interval = "once";
+        wireplumber = {
+          format = " {volume}%";
+          format-muted = " mute";
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           tooltip = false;
         };
+
+        network = {
+          format-wifi        = "  {essid}";
+          format-ethernet    = "󰈀  {ipaddr}";
+          format-disconnected = "󰖪  offline";
+          tooltip-format     = "{ifname}: {ipaddr}\nSignal: {signalStrength}%";
+        };
+
+        "custom/sep1" = sep;
+        "custom/sep2" = sep;
+        "custom/sep3" = sep;
 
         "custom/notification" = {
           exec = "${notifWatcher}/bin/waybar-notification";
           return-type = "json";
+          format = "  {}";
           on-click = "${openHistory}/bin/open-notification-history";
           escape = true;
           restart-interval = 5;

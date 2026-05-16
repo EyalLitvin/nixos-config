@@ -47,12 +47,24 @@
         "$mod, Tab, workspace, e+1"
         "$mod SHIFT, Tab, workspace, e-1"
 
+        # Switch to workspace
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+
         # Move window to workspace
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
         "$mod SHIFT, 3, movetoworkspace, 3"
         "$mod SHIFT, 4, movetoworkspace, 4"
         "$mod SHIFT, 5, movetoworkspace, 5"
+
+        # Volume (media keys — no modifier needed)
+        ", XF86AudioMute,        exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
       ];
 
       binde = [
@@ -86,6 +98,9 @@
           render_power = 2;
         };
       };
+
+      # Workspace-to-monitor pinning lives in hosts/<machine>/monitors.nix
+      # (monitor connector names are machine-specific)
 
       animations = {
         enabled = true;

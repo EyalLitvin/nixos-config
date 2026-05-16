@@ -1,4 +1,6 @@
-#custom-sep {
+#custom-sep1,
+#custom-sep2,
+#custom-sep3 {
   color: @base03;
   padding: 0 4px;
 }
@@ -6,4 +8,12 @@
 #custom-notification {
   padding: 0 10px;
   font-family: "FiraCode Nerd Font Mono", monospace;
+}
+
+#wireplumber {
+  padding: 0 8px;
+}
+
+#network {
+  padding: 0 8px;
 }
