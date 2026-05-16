@@ -8,6 +8,7 @@
 
   networking.hostName = "onyx";
 
-  systemSettings.hardware.nvidia.enable = true;
-  systemSettings.hardware.audio.enable  = true;
+  systemSettings.hardware.nvidia.enable     = true;
+  systemSettings.hardware.audio.enable     = true;
+  systemSettings.hardware.bluetooth.enable = true;
 }

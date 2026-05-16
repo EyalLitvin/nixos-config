@@ -12,8 +12,6 @@ let
       "$history_file" | ${pkgs.fuzzel}/bin/fuzzel --dmenu)
     [ -n "$selected" ] && printf '%s' "$selected" | ${pkgs.wl-clipboard}/bin/wl-copy
   '';
-
-  sep = { format = "||"; interval = "once"; tooltip = false; };
 in
 {
   home.packages = [ openHistory ];
@@ -25,16 +23,17 @@ in
       mainBar = {
         layer = "top";
         position = "top";
-        height = 36;
+        height = 40;
+
         modules-left   = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
         modules-right  = [
+          "cpu"
+          "memory"
+          "disk"
           "wireplumber"
-          "custom/sep1"
           "network"
-          "custom/sep2"
           "custom/notification"
-          "custom/sep3"
           "tray"
         ];
 
@@ -44,12 +43,25 @@ in
         };
 
         clock = {
-          format = " {:%H:%M}";
-          format-alt = " {:%Y-%m-%d}";
+          format = "{:%H:%M  %a %d %b}";
           tooltip = false;
         };
 
-        tray.spacing = 8;
+        cpu = {
+          format = "󰘚 {usage}%";
+          interval = 2;
+          tooltip = false;
+        };
+
+        memory = {
+          format = "󰍛 {used}G";
+          tooltip-format = "{used}G / {total}G";
+        };
+
+        disk = {
+          format = "󰋊 {percentage_used}%";
+          tooltip-format = "{used} used / {total} total";
+        };
 
         wireplumber = {
           format = " {volume}%";
@@ -65,9 +77,19 @@ in
           tooltip-format     = "{ifname}: {ipaddr}\nSignal: {signalStrength}%";
         };
 
-        "custom/sep1" = sep;
-        "custom/sep2" = sep;
-        "custom/sep3" = sep;
+        bluetooth = {
+          format = "󰂯";
+          format-connected = "󰂱 {device_alias}";
+          format-connected-battery = "󰂱 {device_alias} {device_battery_percentage}%";
+          on-click = "blueman-manager";
+          tooltip-format = "{num_connected} connected\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}";
+        };
+
+        tray = {
+          spacing = 8;
+          icon-size = 16;
+        };
 
         "custom/notification" = {
           exec = "${notifWatcher}/bin/waybar-notification";

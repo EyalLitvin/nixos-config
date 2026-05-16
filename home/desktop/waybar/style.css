@@ -1,19 +1,119 @@
-#custom-sep1,
-#custom-sep2,
-#custom-sep3 {
-  color: @base03;
+* {
+  font-family: "FiraCode Nerd Font Mono", monospace;
+  font-size: 13px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @base00;
+  color: @base05;
+}
+
+/* ── Pill base ─────────────────────────────────────────── */
+
+#workspaces,
+#clock,
+#wireplumber,
+#network,
+#bluetooth,
+#custom-notification,
+#tray {
+  background: @base02;
+  border-radius: 8px;
+  padding: 0 12px;
+  margin: 6px 3px;
+  color: @base05;
+}
+
+/* ── Workspaces ───────────────────────────────────────── */
+
+#workspaces {
   padding: 0 4px;
 }
 
-#custom-notification {
+#workspaces button {
+  padding: 0 8px;
+  color: @base04;
+  border-radius: 6px;
+  margin: 3px 1px;
+  background: transparent;
+  min-height: 22px;
+}
+
+#workspaces button.active {
+  background: @base03;
+  color: @base07;
+}
+
+#workspaces button:hover {
+  background: @base03;
+  color: @base06;
+}
+
+/* ── Clock ─────────────────────────────────────────────── */
+
+#clock {
+  color: @base09;
+}
+
+/* ── System stats — grouped pill ──────────────────────── */
+
+#cpu, #memory, #disk {
+  background: @base02;
   padding: 0 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+#cpu {
+  border-radius: 8px 0 0 8px;
+  margin-left: 3px;
+  margin-right: 0;
+  color: @base0D;
+  padding-right: 6px;
+}
+
+#memory {
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 0;
+  color: @base0A;
+  border-left: 1px solid @base03;
+  border-right: 1px solid @base03;
+}
+
+#disk {
+  border-radius: 0 8px 8px 0;
+  margin-left: 0;
+  margin-right: 3px;
+  color: @base0B;
+  padding-left: 6px;
+}
+
+/* ── Module accent colors ──────────────────────────────── */
+
+#wireplumber        { color: @base0C; }
+#wireplumber.muted  { color: @base04; }
+#network            { color: @base0D; }
+#bluetooth          { color: @base0D; }
+#bluetooth.connected { color: @base0C; }
+
+/* ── Notification — fixed width ────────────────────────── */
+
+#custom-notification {
   font-family: "FiraCode Nerd Font Mono", monospace;
+  min-width: 120px;
+  color: @base05;
 }
 
-#wireplumber {
+/* ── Tray ───────────────────────────────────────────────── */
+
+#tray {
   padding: 0 8px;
 }
 
-#network {
-  padding: 0 8px;
+#tray > .passive {
+  -gtk-icon-effect: dim;
 }

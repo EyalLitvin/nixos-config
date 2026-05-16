@@ -6,14 +6,10 @@ import sys
 import threading
 
 ALLOWED = {"waybar-notify"}
-DEFAULT_TEXT = "..."
-STATIC_SECS = 10.0
-SCROLL_SPEED = 0.12   # seconds per character step
-MAX_WIDTH = 28
+MAX_WIDTH = 12          # characters always reserved in the bar
+STATIC_SECS = 10.0     # how long a notification stays visible
+HISTORY_FILE = os.path.expanduser("~/.local/state/waybar-notifications.json")
 MAX_HISTORY = 50
-HISTORY_FILE = os.path.expanduser(
-    "~/.local/state/waybar-notifications.json"
-)
 MATCH = (
     "type=method_call,"
     "interface=org.freedesktop.Notifications,"
@@ -23,27 +19,22 @@ MATCH = (
 _lock = threading.Lock()
 _wake = threading.Event()
 _thread = None
-_current = ("", "")  # (summary, body)
+_current = ("", "")
+
+
+def pad(text):
+    """Return exactly MAX_WIDTH chars: truncate with … or right-pad."""
+    if len(text) <= MAX_WIDTH:
+        return text.ljust(MAX_WIDTH)
+    return text[:MAX_WIDTH - 1] + "…"
 
 
 def emit(text, tooltip=""):
-    data = {"text": text}
+    data = {"text": pad(text)}
     if tooltip:
         data["tooltip"] = tooltip
     sys.stdout.write(json.dumps(data) + "\n")
     sys.stdout.flush()
-
-
-def scroll(text, tooltip):
-    """Slide a MAX_WIDTH window through text. Returns True if interrupted."""
-    padded = text + "   "
-    n = len(padded)
-    for start in range(n):
-        chunk = "".join(padded[(start + i) % n] for i in range(MAX_WIDTH))
-        emit(chunk, tooltip)
-        if _wake.wait(timeout=SCROLL_SPEED):
-            return True
-    return False
 
 
 def display_loop():
@@ -51,18 +42,11 @@ def display_loop():
         _wake.clear()
         with _lock:
             summary, body = _current
-
-        tooltip = body if body else summary
-
-        if len(summary) <= MAX_WIDTH:
-            emit(summary, tooltip)
-            if _wake.wait(timeout=STATIC_SECS):
-                continue
-        else:
-            if scroll(summary, tooltip):
-                continue
-
-        emit(DEFAULT_TEXT)
+        tooltip = f"{summary}\n{body}" if body else summary
+        emit(summary, tooltip)
+        if _wake.wait(timeout=STATIC_SECS):
+            continue  # a new notification interrupted — loop again
+        emit(" " * MAX_WIDTH)  # clear after timeout
         return
 
 
@@ -100,7 +84,7 @@ proc = subprocess.Popen(
     bufsize=1,
 )
 
-emit(DEFAULT_TEXT)
+emit(" " * MAX_WIDTH)  # initial blank state
 
 # Parse dbus-monitor output.
 # Notify signature: app_name (string), replaces_id (uint32), icon (string),

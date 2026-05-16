@@ -5,5 +5,6 @@
     ./nvidia
     ./audio
     ./wifi
+    ./bluetooth
   ];
 }
