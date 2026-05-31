@@ -25,9 +25,10 @@
     };
 
     keymaps = [
-      { mode = "n"; key = "<leader>w"; action = "<cmd>w<cr>";      options.desc = "Save file"; }
-      { mode = "n"; key = "<leader>e"; action = "<cmd>Oil<cr>";    options.desc = "File Explorer"; }
-      { mode = "n"; key = "<leader>g"; action = "<cmd>Neogit<cr>"; options.desc = "Git"; }
+      { mode = "n"; key = "<leader>w"; action = "<cmd>w<cr>";          options.desc = "Save file"; }
+      { mode = "n"; key = "<leader>e"; action = "<cmd>Oil<cr>";        options.desc = "File Explorer"; }
+      { mode = "n"; key = "<leader>g"; action = "<cmd>Neogit<cr>";     options.desc = "Git"; }
+      { mode = "n"; key = "<leader>t"; action = "<cmd>ToggleTerm<cr>"; options.desc = "Terminal"; }
     ];
 
     colorschemes.tokyonight.enable = true;
@@ -104,6 +105,14 @@
     };
 
     plugins.render-markdown.enable = true;
+
+    plugins.toggleterm = {
+      enable = true;
+      settings = {
+        direction = "float";
+        float_opts.border = "curved";
+      };
+    };
 
     extraPlugins = [ pkgs.vimPlugins.kitty-scrollback-nvim ];
     extraConfigLua = ''

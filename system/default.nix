@@ -9,6 +9,7 @@
     ./security
     ./nix
     ./locale
+    ./apps
   ];
 
   # Basic system packages available on all machines
