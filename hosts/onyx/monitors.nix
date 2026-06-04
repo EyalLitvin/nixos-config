@@ -9,8 +9,8 @@
   # auto-places new monitors (often at 0,0), causing a brief overlap warning.
   # Format: "name,WxH@Hz,XxY,scale"
   wayland.windowManager.hyprland.settings.monitor = [
-    "DP-3,    2560x1440@165, 0x0,    1"
-    "HDMI-A-1,1920x1080@60,  2560x0, 1"
+    "DP-3,2560x1440@165,0x0,1"
+    "HDMI-A-1,1920x1080@60,2560x0,1"
   ];
 
   # Hyprland workspace-to-monitor pinning
