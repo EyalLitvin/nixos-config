@@ -4,6 +4,15 @@
 # Connectors: DP-3 = ASUS VG27A (primary, left)  |  HDMI-A-1 = LG FULL HD (right)
 # Workspaces: 1-3 on DP-3 (primary), 4-5 on HDMI-A-1 (secondary)
 {
+  # Hyprland monitor placement — tells Hyprland where each output goes on hot-plug,
+  # before kanshi has a chance to apply its profile. Without these, Hyprland
+  # auto-places new monitors (often at 0,0), causing a brief overlap warning.
+  # Format: "name,WxH@Hz,XxY,scale"
+  wayland.windowManager.hyprland.settings.monitor = [
+    "DP-3,    2560x1440@165, 0x0,    1"
+    "HDMI-A-1,1920x1080@60,  2560x0, 1"
+  ];
+
   # Hyprland workspace-to-monitor pinning
   wayland.windowManager.hyprland.settings.workspace = [
     "1, monitor:DP-3,     persistent:true"

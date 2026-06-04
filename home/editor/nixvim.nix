@@ -29,6 +29,20 @@
       { mode = "n"; key = "<leader>e"; action = "<cmd>Oil<cr>";        options.desc = "File Explorer"; }
       { mode = "n"; key = "<leader>g"; action = "<cmd>Neogit<cr>";     options.desc = "Git"; }
       { mode = "n"; key = "<leader>t"; action = "<cmd>ToggleTerm<cr>"; options.desc = "Terminal"; }
+      { mode = "n"; key = "<leader>p"; action.__raw = ''
+          function()
+            local ft = vim.bo.filetype
+            if ft == "typst" then
+              local client = vim.lsp.get_clients({ bufnr = 0, name = "tinymist" })[1]
+              if client then
+                client:exec_cmd({
+                  command = "tinymist.startDefaultPreview",
+                  arguments = { { uri = vim.uri_from_fname(vim.api.nvim_buf_get_name(0)) } },
+                })
+              end
+            end
+          end
+        ''; options.desc = "Preview"; }
     ];
 
     colorschemes.tokyonight.enable = true;
@@ -62,6 +76,10 @@
           installRustc = false;
         };
         nixd.enable = true;
+        tinymist = {
+          enable = true;
+          settings.exportPdf = "onSave";
+        };
       };
     };
 
