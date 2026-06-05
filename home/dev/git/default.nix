@@ -6,7 +6,7 @@
     signing.format = null;
     settings = {
       user.name = "EyalLitvin";
-      user.email = "eyalitvin@email.com";
+      user.email = "eyalitvin@gmail.com";
     };
   };
 
