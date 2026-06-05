@@ -74,7 +74,7 @@ in
         shell.autoAllow = true;
         shell.enable = true;
         shell.drv = pkgs.mkShell {
-          packages = with pkgs; [ bun ];
+          packages = with pkgs; [ bun nodejs ];
         };
       };
 
