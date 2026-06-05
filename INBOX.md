@@ -10,3 +10,4 @@ Periodically open a Claude session and say: "implement INBOX.md items."
 - the boxes in the status bar shouldn't have the rounded corners
 - I want a drop down in the status bar for wifi management
 - sometimes randomly the wifi stops working, and the machine can't find my home network
+- I want pressing enter on an md file in yazi to open nvim on that file
