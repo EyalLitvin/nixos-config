@@ -137,6 +137,33 @@
       require('kitty-scrollback').setup({
         paste_window = { enabled = false },
       })
+      vim.filetype.add({ extension = { mdx = "markdown" } })
+
+      -- Extend HTML treesitter injection queries so that text content inside
+      -- JSX component elements (uppercase tag names like <Lead>, <Callout>)
+      -- is parsed as markdown_inline. This lets render-markdown find and render
+      -- inline_link nodes inside MDX component blocks.
+      vim.api.nvim_create_autocmd("VimEnter", {
+        once = true,
+        callback = function()
+          local existing = ""
+          for _, path in ipairs(vim.api.nvim_get_runtime_file("queries/html/injections.scm", true)) do
+            local f = io.open(path, "r")
+            if f then
+              existing = existing .. f:read("*a") .. "\n"
+              f:close()
+            end
+          end
+          local addition = [[
+(element
+  (start_tag (tag_name) @_name)
+  (text) @injection.content
+  (#match? @_name "^[A-Z]")
+  (#set! injection.language "markdown_inline"))
+]]
+          vim.treesitter.query.set("html", "injections", existing .. addition)
+        end,
+      })
     '';
   };
 }
