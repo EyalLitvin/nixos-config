@@ -37,6 +37,11 @@ def emit(text, tooltip=""):
     sys.stdout.flush()
 
 
+def emit_empty():
+    sys.stdout.write(json.dumps({"text": "", "class": "empty"}) + "\n")
+    sys.stdout.flush()
+
+
 def display_loop():
     while True:
         _wake.clear()
@@ -46,7 +51,7 @@ def display_loop():
         emit(summary, tooltip)
         if _wake.wait(timeout=STATIC_SECS):
             continue  # a new notification interrupted — loop again
-        emit(" " * MAX_WIDTH)  # clear after timeout
+        emit_empty()  # clear after timeout
         return
 
 
@@ -84,7 +89,7 @@ proc = subprocess.Popen(
     bufsize=1,
 )
 
-emit(" " * MAX_WIDTH)  # initial blank state
+emit_empty()  # initial blank state
 
 # Parse dbus-monitor output.
 # Notify signature: app_name (string), replaces_id (uint32), icon (string),

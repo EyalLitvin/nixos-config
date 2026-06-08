@@ -15,8 +15,9 @@
       ];
       open.rules = [
         { mime = "image/*"; use = "image"; }
-        { mime = "text/*"; use = "editor"; }
+        { name = "*.md"; use = "editor"; }
         { name = "*.nix"; use = "editor"; }
+        { mime = "text/*"; use = "editor"; }
       ];
     };
     keymap = {

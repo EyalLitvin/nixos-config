@@ -14,7 +14,15 @@ let
   '';
 in
 {
-  home.packages = [ openHistory ];
+  home.packages = [ openHistory pkgs.networkmanager_dmenu ];
+
+  xdg.configFile."networkmanager-dmenu/config.ini".text = ''
+    [dmenu]
+    dmenu_command = ${pkgs.fuzzel}/bin/fuzzel --dmenu
+
+    [editor]
+    terminal = ${pkgs.kitty}/bin/kitty
+  '';
 
   programs.waybar = {
     enable = true;
@@ -71,10 +79,12 @@ in
         };
 
         network = {
-          format-wifi        = "  {essid}";
+          format-wifi        = "{icon}  {essid}";
           format-ethernet    = "󰈀  {ipaddr}";
           format-disconnected = "󰖪  offline";
+          format-icons       = { wifi = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"]; };
           tooltip-format     = "{ifname}: {ipaddr}\nSignal: {signalStrength}%";
+          on-click           = "${pkgs.networkmanager_dmenu}/bin/networkmanager_dmenu";
         };
 
         bluetooth = {

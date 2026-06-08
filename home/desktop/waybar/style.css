@@ -21,7 +21,7 @@ window#waybar {
 #custom-notification,
 #tray {
   background: @base02;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 0 12px;
   margin: 6px 3px;
   color: @base05;
@@ -36,7 +36,7 @@ window#waybar {
 #workspaces button {
   padding: 0 8px;
   color: @base04;
-  border-radius: 6px;
+  border-radius: 0;
   margin: 3px 1px;
   background: transparent;
   min-height: 22px;
@@ -68,7 +68,7 @@ window#waybar {
 }
 
 #cpu {
-  border-radius: 8px 0 0 8px;
+  border-radius: 0;
   margin-left: 3px;
   margin-right: 0;
   color: @base0D;
@@ -85,7 +85,7 @@ window#waybar {
 }
 
 #disk {
-  border-radius: 0 8px 8px 0;
+  border-radius: 0;
   margin-left: 0;
   margin-right: 3px;
   color: @base0B;
@@ -104,8 +104,14 @@ window#waybar {
 
 #custom-notification {
   font-family: "FiraCode Nerd Font Mono", monospace;
-  min-width: 120px;
   color: @base05;
+}
+
+#custom-notification.empty {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
 }
 
 /* ── Tray ───────────────────────────────────────────────── */
