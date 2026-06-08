@@ -9,3 +9,4 @@ Periodically open a Claude session and say: "implement INBOX.md items."
   (deferred — observe next occurrence to determine if driver crash vs. power management)
 - I would like to have keyboard shortcut to lock the screen (like Win+L)
 - I would like the keybinds to work even when I am on another language.
+- I want to add a configurable status bar option for showing battery life, and turning it on in phoenix (it is a laptop). 
