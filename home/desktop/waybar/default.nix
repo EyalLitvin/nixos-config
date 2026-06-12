@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 let
+  cfg = config.userSettings.desktop.waybar;
+
   notifWatcher = pkgs.writers.writePython3Bin "waybar-notification" {
   } (builtins.readFile ./waybar-notification.py);
 
@@ -14,9 +16,12 @@ let
   '';
 in
 {
-  home.packages = [ openHistory pkgs.networkmanager_dmenu ];
+  options.userSettings.desktop.waybar.battery.enable =
+    lib.mkEnableOption "battery status widget in waybar";
 
-  xdg.configFile."networkmanager-dmenu/config.ini".text = ''
+  config.home.packages = [ openHistory pkgs.networkmanager_dmenu ];
+
+  config.xdg.configFile."networkmanager-dmenu/config.ini".text = ''
     [dmenu]
     dmenu_command = ${pkgs.fuzzel}/bin/fuzzel --dmenu
 
@@ -24,7 +29,7 @@ in
     terminal = ${pkgs.kitty}/bin/kitty
   '';
 
-  programs.waybar = {
+  config.programs.waybar = {
     enable = true;
     systemd.enable = true;
     settings = {
@@ -35,15 +40,10 @@ in
 
         modules-left   = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right  = [
-          "cpu"
-          "memory"
-          "disk"
-          "wireplumber"
-          "network"
-          "custom/notification"
-          "tray"
-        ];
+        modules-right  =
+          [ "cpu" "memory" "disk" "wireplumber" "network" ]
+          ++ lib.optional cfg.battery.enable "battery"
+          ++ [ "custom/notification" "tray" ];
 
         "hyprland/workspaces" = {
           format = "{id}";
@@ -94,6 +94,18 @@ in
           on-click = "blueman-manager";
           tooltip-format = "{num_connected} connected\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}";
+        };
+
+        battery = lib.mkIf cfg.battery.enable {
+          format = "{icon} {capacity}%";
+          format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󰚥 {capacity}%";
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+          tooltip-format = "{timeTo}, {capacity}%";
         };
 
         tray = {
