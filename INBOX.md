@@ -12,3 +12,4 @@ Periodically open a Claude session and say: "implement INBOX.md items."
 - I want to add a configurable status bar option for showing battery life, and turning it on in phoenix (it is a laptop). 
 - install discord
 - install github cli (gh something something)
+- install discord
