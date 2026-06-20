@@ -60,6 +60,15 @@ in
         };
       };
 
+      sokobantron = {
+        url = "git@github.com:EyalLitvin/sokobantron.git";
+        shell.autoAllow = true;
+        shell.enable = true;
+        shell.drv = pkgs.mkShell {
+          packages = with pkgs; [ rustc cargo rust-analyzer ];
+        };
+      };
+
       Thesis = {
         url = "git@github.com:EyalLitvin/Thesis.git";
         shell.autoAllow = true;
