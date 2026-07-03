@@ -26,7 +26,8 @@
 
     keymaps = [
       { mode = "n"; key = "<leader>w"; action = "<cmd>w<cr>";          options.desc = "Save file"; }
-      { mode = "n"; key = "<leader>e"; action = "<cmd>Oil<cr>";        options.desc = "File Explorer"; }
+      { mode = "n"; key = "<leader>e"; action = "<cmd>Neotree toggle<cr>"; options.desc = "File Explorer (sidebar)"; }
+      { mode = "n"; key = "<leader>E"; action = "<cmd>Oil<cr>";           options.desc = "File Explorer (buffer)"; }
       { mode = "n"; key = "<leader>g"; action = "<cmd>Neogit<cr>";     options.desc = "Git"; }
       { mode = "n"; key = "<leader>t"; action = "<cmd>ToggleTerm<cr>"; options.desc = "Terminal"; }
       { mode = "n"; key = "<leader>p"; action.__raw = ''
@@ -48,6 +49,31 @@
     colorschemes.tokyonight.enable = true;
 
     plugins.web-devicons.enable = true;
+
+    plugins.illuminate = {
+      enable = true;
+      settings.delay = 100;
+    };
+
+    plugins.neo-tree = {
+      enable = true;
+      closeIfLastWindow = true;
+      window = {
+        width = 35;
+        position = "left";
+      };
+      filesystem = {
+        filteredItems = {
+          visible = true;
+          hideDotfiles = false;
+        };
+      };
+    };
+
+    plugins.alpha = {
+      enable = true;
+      theme = "dashboard";
+    };
 
     plugins.which-key = {
       enable = true;

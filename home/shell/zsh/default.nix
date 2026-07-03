@@ -34,7 +34,8 @@
 
     shellAliases = {
       cat = "bat";
-      oil = "nvim .";
+      oil  = "nvim .";
+      ngit = "nvim -c 'Neogit'";
       cs  = "z";
       vim = "nvim";
       vi  = "nvim";
