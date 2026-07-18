@@ -26,6 +26,10 @@
 
     keymaps = [
       { mode = "n"; key = "<leader>w"; action = "<cmd>w<cr>";          options.desc = "Save file"; }
+      { mode = "n"; key = "<C-h>"; action = "<C-w>h"; options.desc = "Move to left window"; }
+      { mode = "n"; key = "<C-j>"; action = "<C-w>j"; options.desc = "Move to lower window"; }
+      { mode = "n"; key = "<C-k>"; action = "<C-w>k"; options.desc = "Move to upper window"; }
+      { mode = "n"; key = "<C-l>"; action = "<C-w>l"; options.desc = "Move to right window"; }
       { mode = "n"; key = "<leader>e"; action = "<cmd>Neotree toggle<cr>"; options.desc = "File Explorer (sidebar)"; }
       { mode = "n"; key = "<leader>E"; action = "<cmd>Oil<cr>";           options.desc = "File Explorer (buffer)"; }
       { mode = "n"; key = "<leader>g"; action = "<cmd>Neogit<cr>";     options.desc = "Git"; }
