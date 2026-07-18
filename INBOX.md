@@ -13,3 +13,4 @@ Periodically open a Claude session and say: "implement INBOX.md items."
 - install discord
 - install github cli (gh something something)
 - install discord
+- maybe some kind of utility to see the git state of all dev projects. like a dashboard but cli tool for that.
