@@ -61,15 +61,15 @@
 
     plugins.neo-tree = {
       enable = true;
-      closeIfLastWindow = true;
-      window = {
-        width = 35;
-        position = "left";
-      };
-      filesystem = {
-        filteredItems = {
+      settings = {
+        close_if_last_window = true;
+        window = {
+          width = 35;
+          position = "left";
+        };
+        filesystem.filtered_items = {
           visible = true;
-          hideDotfiles = false;
+          hide_dotfiles = false;
         };
       };
     };

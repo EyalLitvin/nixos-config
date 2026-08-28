@@ -22,7 +22,5 @@
   home.username = "eyal";
   home.homeDirectory = "/home/eyal";
 
-  gtk.gtk4.theme = null;
-
   home.stateVersion = "24.11";
 }
