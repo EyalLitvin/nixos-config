@@ -25,6 +25,13 @@
     };
 
     keymaps = [
+      # Move by visual (screen) lines, but keep counts logical so 5j still
+      # matches what the relativenumber column shows.
+      { mode = [ "n" "v" ]; key = "j"; action = "v:count == 0 ? 'gj' : 'j'";
+        options = { expr = true; silent = true; desc = "Down (visual line)"; }; }
+      { mode = [ "n" "v" ]; key = "k"; action = "v:count == 0 ? 'gk' : 'k'";
+        options = { expr = true; silent = true; desc = "Up (visual line)"; }; }
+
       { mode = "n"; key = "<leader>w"; action = "<cmd>w<cr>";          options.desc = "Save file"; }
       { mode = "n"; key = "<C-h>"; action = "<C-w>h"; options.desc = "Move to left window"; }
       { mode = "n"; key = "<C-j>"; action = "<C-w>j"; options.desc = "Move to lower window"; }
