@@ -97,6 +97,7 @@ window#waybar {
 
 #wireplumber        { color: @base0C; }
 #wireplumber.muted  { color: @base04; }
+#wireplumber:hover  { background: @base03; }
 #network            { color: @base0D; }
 #bluetooth          { color: @base0D; }
 #bluetooth.connected { color: @base0C; }

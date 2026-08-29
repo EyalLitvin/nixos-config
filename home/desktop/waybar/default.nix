@@ -19,7 +19,7 @@ in
   options.userSettings.desktop.waybar.battery.enable =
     lib.mkEnableOption "battery status widget in waybar";
 
-  config.home.packages = [ openHistory pkgs.networkmanager_dmenu ];
+  config.home.packages = [ openHistory pkgs.networkmanager_dmenu pkgs.pavucontrol ];
 
   config.xdg.configFile."networkmanager-dmenu/config.ini".text = ''
     [dmenu]
@@ -72,9 +72,14 @@ in
         };
 
         wireplumber = {
-          format = " {volume}%";
-          format-muted = " mute";
+          format = "{icon} {volume}%";
+          format-muted = "󰝟 mute";
+          format-icons = [ "󰕿" "󰖀" "󰕾" ];
+          # Left click: mute.  Right click: full mixer.  Scroll: volume.
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-click-right = "${pkgs.pavucontrol}/bin/pavucontrol";
+          scroll-step = 5;
+          max-volume = 100;
           tooltip = false;
         };
 
