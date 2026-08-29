@@ -7,19 +7,18 @@
   # Hyprland monitor placement — tells Hyprland where each output goes on hot-plug,
   # before kanshi has a chance to apply its profile. Without these, Hyprland
   # auto-places new monitors (often at 0,0), causing a brief overlap warning.
-  # Format: "name,WxH@Hz,XxY,scale"
   wayland.windowManager.hyprland.settings.monitor = [
-    "DP-3,2560x1440@165,0x0,1"
-    "HDMI-A-1,1920x1080@60,2560x0,1"
+    { output = "DP-3";     mode = "2560x1440@165"; position = "0x0";    scale = 1; }
+    { output = "HDMI-A-1"; mode = "1920x1080@60";  position = "2560x0"; scale = 1; }
   ];
 
   # Hyprland workspace-to-monitor pinning
-  wayland.windowManager.hyprland.settings.workspace = [
-    "1, monitor:DP-3,     persistent:true"
-    "2, monitor:DP-3,     persistent:true"
-    "3, monitor:DP-3,     persistent:true"
-    "4, monitor:HDMI-A-1, persistent:true"
-    "5, monitor:HDMI-A-1, persistent:true"
+  wayland.windowManager.hyprland.settings.workspace_rule = [
+    { workspace = "1"; monitor = "DP-3";     persistent = true; }
+    { workspace = "2"; monitor = "DP-3";     persistent = true; }
+    { workspace = "3"; monitor = "DP-3";     persistent = true; }
+    { workspace = "4"; monitor = "HDMI-A-1"; persistent = true; }
+    { workspace = "5"; monitor = "HDMI-A-1"; persistent = true; }
   ];
 
   # kanshi monitor profiles — matches by model+serial, not port
