@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./claude
     ./git
     ./direnv
     ./languages
