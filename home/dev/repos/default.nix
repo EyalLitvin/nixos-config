@@ -105,6 +105,22 @@ in
         };
       };
 
+      "saddle-point" = {
+        url = "git@github.com:EyalLitvin/saddle-point.git";
+        shell.autoAllow = true;
+        shell.enable = true;
+        shell.drv = pkgs.mkShell {
+          packages = [ pkgs.python3 pkgs.stdenv.cc.cc.lib ];
+          shellHook = ''
+            export LD_LIBRARY_PATH="${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH"
+            if [ ! -d .venv ]; then
+              python3 -m venv .venv
+            fi
+            source .venv/bin/activate
+          '';
+        };
+      };
+
       "prolix" = {
         url = "git@github.com:EyalLitvin/prolix.git";
         shell.autoAllow = true;
