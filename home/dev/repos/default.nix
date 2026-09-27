@@ -74,7 +74,7 @@ in
         shell.autoAllow = true;
         shell.enable = true;
         shell.drv = pkgs.mkShell {
-          packages = with pkgs; [ typst tinymist ];
+          packages = with pkgs; [ typst tinymist nodejs gap ];
         };
       };
 
@@ -125,6 +125,22 @@ in
         url = "git@github.com:EyalLitvin/prolix.git";
         shell.autoAllow = true;
         shell.enable = false;
+      };
+
+      hoopoe = {
+        url = "git@github.com:EyalLitvin/hoopoe.git";
+        shell.autoAllow = true;
+        shell.enable = true;
+        shell.drv = pkgs.mkShell rec {
+          nativeBuildInputs = [ pkgs.pkg-config ];
+          buildInputs = with pkgs; [
+            rustc cargo rust-analyzer
+            udev alsa-lib vulkan-loader
+            libxkbcommon wayland
+            xorg.libX11 xorg.libXcursor xorg.libXi xorg.libXrandr
+          ];
+          LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
+        };
       };
 
       taskman = {
