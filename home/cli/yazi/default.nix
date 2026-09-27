@@ -15,8 +15,8 @@
       ];
       open.rules = [
         { mime = "image/*"; use = "image"; }
-        { name = "*.md"; use = "editor"; }
-        { name = "*.nix"; use = "editor"; }
+        { url = "*.md"; use = "editor"; }
+        { url = "*.nix"; use = "editor"; }
         { mime = "text/*"; use = "editor"; }
       ];
     };
