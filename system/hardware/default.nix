@@ -6,5 +6,6 @@
     ./audio
     ./wifi
     ./bluetooth
+    ./removable-media
   ];
 }

@@ -138,6 +138,7 @@ in
             udev alsa-lib vulkan-loader
             libxkbcommon wayland
             xorg.libX11 xorg.libXcursor xorg.libXi xorg.libXrandr
+            python312 uv stdenv.cc.cc.lib
           ];
           LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
         };

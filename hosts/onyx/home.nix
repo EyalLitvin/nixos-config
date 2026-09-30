@@ -6,5 +6,4 @@
 
   userSettings.desktop.kanshi.enable   = true;
   userSettings.apps.printing3d.enable  = true;
-  userSettings.apps.openacp.enable     = true;
 }
