@@ -87,6 +87,16 @@ in
         };
       };
 
+      chronicles = {
+        url = "git@github.com:EyalLitvin/chronicles.git";
+        shell.autoAllow = true;
+        shell.enable = true;
+        # nodejs ships npm, so this is all a plain web project needs to start.
+        shell.drv = pkgs.mkShell {
+          packages = [ pkgs.nodejs ];
+        };
+      };
+
       "opti-do" = {
         url = "git@github.com:EyalLitvin/opti-do.git";
         shell.autoAllow = true;
