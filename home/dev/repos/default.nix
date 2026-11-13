@@ -23,6 +23,18 @@ let
 
   androidSdk = androidComposition.androidsdk;
 
+  # Shiron builds a Capacitor APK, which contains no native code: no NDK, no
+  # cmake, one platform and one build-tools. Separate from the composition above
+  # so the Flutter projects' needs and this one's can move independently;
+  # androidenv composes from per-component derivations, so the pieces both
+  # compositions use are fetched once and shared.
+  shironAndroidSdk = (androidPkgs.androidenv.composeAndroidPackages {
+    buildToolsVersions = [ buildToolsVersion ];
+    platformVersions   = [ "35" ];
+    includeNDK         = false;
+    cmakeVersions      = [ ];   # androidenv pulls one in unless told otherwise
+  }).androidsdk;
+
   # Flutter 3.41.x gradle plugin unconditionally calls .readText() on
   # bin/cache/engine.realm, but the Nix store is read-only so flutter precache
   # can't create it.  Patch the package to include the empty file that a stable
@@ -171,6 +183,56 @@ in
           '';
         };
       };
+
+      shiron = {
+        url = "git@github.com:EyalLitvin/shiron.git";
+        shell.autoAllow = true;
+        shell.enable = true;
+        # androidPkgs.mkShell, not pkgs.mkShell: the Android SDK is unfree and
+        # needs the licence flag, so it only exists in that pkgs instance.
+        shell.drv = androidPkgs.mkShell {
+          packages = [
+            # tools/build.py is pure stdlib; numpy + ffmpeg are only needed by
+            # tools/process_samples.py, which regenerates assets/samples.
+            (pkgs.python3.withPackages (ps: [ ps.numpy ]))
+            pkgs.ffmpeg
+            pkgs.nodejs
+            # rsvg-convert, for tools/icons.py: bakes the launcher icon PNGs
+            # out of assets/icon/shiron.svg.
+            pkgs.librsvg
+            # Ships lib/node_modules/{playwright,playwright-core}, so the browser
+            # tests resolve require('playwright') with no npm install at all.
+            pkgs.playwright-test
+            # The Capacitor shell in mobile/ wraps dist/index.html into an APK.
+            shironAndroidSdk
+            # Capacitor 7's android library compiles with --source 21, so this is
+            # 21 and not the 17 the Flutter projects above pin.
+            androidPkgs.jdk21
+          ];
+          # Playwright normally downloads its own Chromium, which cannot run on
+          # NixOS. Point it at the Nix-built browsers instead; the npm package
+          # and the browser revision must come from the same version, which is
+          # why both of these are taken from the same nixpkgs.
+          NODE_PATH                              = "${pkgs.playwright-test}/lib/node_modules";
+          PLAYWRIGHT_BROWSERS_PATH               = "${pkgs.playwright-driver.browsers}";
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD       = "1";
+          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
+
+          ANDROID_HOME = "${shironAndroidSdk}/libexec/android-sdk";
+          # The Android Gradle plugin pulls a prebuilt aapt2 from Maven, and that
+          # binary is dynamically linked against paths NixOS does not have. Point
+          # Gradle at the Nix-built one instead. The path is only exported;
+          # tools/release.py passes it as -P, so unlike the Flutter projects
+          # above nothing rewrites a tracked gradle.properties on shell entry.
+          AAPT2 = "${shironAndroidSdk}/libexec/android-sdk/build-tools/${buildToolsVersion}/aapt2";
+          # The Android Gradle plugin defaults to whatever build-tools version it
+          # shipped against and tries to auto-install it, which fails against a
+          # read-only store. tools/release.py forwards this so Gradle asks for the
+          # one version this shell actually provides.
+          ANDROID_BUILD_TOOLS = buildToolsVersion;
+        };
+      };
+
     };
   };
 }
