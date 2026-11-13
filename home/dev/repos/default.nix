@@ -35,6 +35,20 @@ let
     cmakeVersions      = [ ];   # androidenv pulls one in unless told otherwise
   }).androidsdk;
 
+  # Mosaic is a plain Kotlin/Compose app with no native code, so no NDK and no
+  # cmake, and one platform and one build-tools version. compileSdk 36 means
+  # platform 36, and AGP expects the matching 36.0.0 build-tools -- which is why
+  # this is a separate composition from the 35.0.0 the Flutter projects pin.
+  # androidenv composes from per-component derivations, so anything two
+  # compositions share is still fetched once.
+  mosaicBuildTools = "36.0.0";
+  mosaicAndroidSdk = (androidPkgs.androidenv.composeAndroidPackages {
+    buildToolsVersions = [ mosaicBuildTools ];
+    platformVersions   = [ "36" ];
+    includeNDK         = false;
+    cmakeVersions      = [ ];
+  }).androidsdk;
+
   # Flutter 3.41.x gradle plugin unconditionally calls .readText() on
   # bin/cache/engine.realm, but the Nix store is read-only so flutter precache
   # can't create it.  Patch the package to include the empty file that a stable
@@ -233,6 +247,26 @@ in
         };
       };
 
+      mosaic = {
+        url = "git@github.com:EyalLitvin/mosaic.git";
+        shell.autoAllow = true;
+        shell.enable = true;
+        shell.drv = androidPkgs.mkShell {
+          # JDK 21: what the project's Java toolchain declares, and what current
+          # AGP and Kotlin build on. The Flutter projects above are still on 17.
+          packages = [ mosaicAndroidSdk androidPkgs.jdk21 ];
+
+          ANDROID_HOME = "${mosaicAndroidSdk}/libexec/android-sdk";
+          # AGP pulls a prebuilt aapt2 from Maven which is dynamically linked
+          # against paths NixOS does not have. The repo's ./gw forwards this as
+          # -Pandroid.aapt2FromMavenOverride, so -- unlike the Flutter projects
+          # above -- nothing rewrites a tracked gradle.properties on shell entry.
+          AAPT2 = "${mosaicAndroidSdk}/libexec/android-sdk/build-tools/${mosaicBuildTools}/aapt2";
+          # AGP otherwise asks for whatever build-tools version it shipped
+          # against and tries to install it into the read-only store.
+          ANDROID_BUILD_TOOLS = mosaicBuildTools;
+        };
+      };
     };
   };
 }
